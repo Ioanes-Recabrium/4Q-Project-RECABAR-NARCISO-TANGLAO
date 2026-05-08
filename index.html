@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgb(18, 33, 72);
+      font-family: Arial, sans-serif;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.62);
+      padding: 30px;
+      width: 280px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #121c36;
+      border: #eee solid 2px;
+    }
+
+    h2 { margin-bottom: 15px; }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 20px;
+      background: #eee;
+      text-align: center;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    .row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      font-size: 13px;
+      margin: 10px 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #354f91;
+      color: #ffffff;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:disabled {
+      background: #666;
+      cursor: not-allowed;
+    }
+
+    #msg {
+      margin-top: 15px;
+      font-size: 14px;
+      min-height: 20px;
+    }
+    img{
+      background-color: #354f91;
+      border-radius: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <img src="logo.png" alt="Logo" style="width: 100px; margin-bottom: 20px;">
+  <h2>Login</h2>
+  <input type="text" id="user" placeholder="Username">
+  <input type="password" id="pass" placeholder="Password">
+
+  <div class="row">
+    <input type="checkbox"> <span>Stay logged in</span>
+  </div>
+
+  <button onclick="login()">Login</button>
+  <div id="msg"></div>
+</div>
+
+<script>
+  let attempts = 0;
+  let locked = false;
+
+  function login() {
+    if (locked) return;
+
+    let username = document.getElementById("user").value;
+    let password = document.getElementById("pass").value;
+    let msg = document.getElementById("msg");
+
+    if (username === "admin" && password === "1234") {
+      msg.style.color = "lime";
+      msg.textContent = "Redirecting...";
+      setTimeout(() => {
+        window.location.href = "notebooks.html";
+      }, 500);
+    } else {
+      attempts++;
+      msg.style.color = "orange";
+      msg.textContent = "Invalid credentials";
+
+      if (attempts >= 3) {
+        lockLogin();
+      }
+    }
+  }
+
+  function lockLogin() {
+    locked = true;
+    let msg = document.getElementById("msg");
+    let button = document.querySelector("button");
+
+    button.disabled = true;
+    msg.style.color = "red";
+    msg.textContent = "Locked. Wait 30 seconds.";
+
+    setTimeout(() => {
+      locked = false;
+      attempts = 0;
+      button.disabled = false;
+      msg.textContent = "";
+    }, 30000);
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: #ffffff;
+            background-image: url('MainBG.png');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; 
+            left: 0;
+            height: 100%; 
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 10px;
+            box-sizing: border-box;
+            background: rgb(18, 33, 72);
+            row-gap: 20px; 
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 20px;
+            font-family: 'Courier New', Courier, monospace;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        nav img.nav-icon { 
+            width: 35px; 
+            height: auto; 
+            margin-right: 12px; 
+        }
+
+        .main {
+            margin-left: 250px; 
+            padding: 40px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            background-color: rgba(50, 69, 126, 0.8);
+            padding: 15px 25px;
+            border-radius: 15px;
+            display: inline-block;
+            border: 2px solid white;
+        }
+
+        .container {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        .profile-box {
+            text-align: center;
+        }
+
+        .profile-box img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #354f91;
+            object-fit: cover;
+            background: #fff;
+        }
+
+        .card {
+            background: rgba(18, 33, 72, 0.702);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            border-radius: 15px;
+            width: 350px;
+            border: 4px solid #354f91;
+        }
+
+        .btn {
+            margin-top: 15px;
+            padding: 10px;
+            width: 100%;
+            background: #ffe8f0;
+            color: #3c4f81;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <img src="Logo.png" style="width: 165px; height: auto; align-self: center; margin-bottom: 10px;">
+        
+        <b><a href="dashboard.html"><img class="nav-icon" src="DashboardIcon.png">Dashboard</a></b>
+        <b><a href="tasks.html"><img class="nav-icon" src="TaskIcon.png">Tasks</a></b>
+        <b><a href="notebooks.html"><img class="nav-icon" src="NotebookIcon.png">Notebook</a></b>
+        <b><a href="profile.html" style="background-color:rgb(18, 33, 72); width: 250px;padding-top: 25px;padding-bottom: 25px;border-radius: 25px;"><img class="nav-icon" src="ProfileIcon.png">Profile</a></b>
+        <b><a href="index.html"><img class="nav-icon" src="LogoutIcon.png">Logout</a></b>
+    </nav>
+
+    <div class="main">
+        <div class="title">PROFILE</div>
+
+        <div class="container">
+            <div class="profile-box">
+                <img id="preview" src="https://via.placeholder.com/150">
+                <br><br>
+                <input type="file" id="fileInput" accept="image/*">
+            </div>
+
+            <div class="card">
+                <h3>Student Info</h3>
+                <p><b>ID:</b> SN123456</p>
+                <p><b>Contact:</b> 09123456789</p>
+                <p><b>Email:</b> student@email.com</p>
+                <p><b>Gender:</b> Male</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById("fileInput");
+        const preview = document.getElementById("preview");
+
+        fileInput.onchange = function () {
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+    </script>
+
+</body>
+</html>
